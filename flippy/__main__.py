@@ -25,19 +25,22 @@ if __name__ == '__main__':
             4: 'images/background-night.png',
         }
     )
-    flippy.create_bird(
-        {
-            1: ['images/bluebird-downflap.png', 'images/bluebird-midflap.png', 'images/bluebird-upflap.png'],
-            2: ['images/redbird-downflap.png', 'images/redbird-midflap.png', 'images/redbird-upflap.png'],
-            3: ['images/yellowbird-downflap.png', 'images/yellowbird-midflap.png', 'images/yellowbird-upflap.png'],
-        }
-    )
+    bird_level_dictionary = {}
+    for level in range(10):
+        if level < 3:
+            bird_level_dictionary[level] = ['images/bluebird-downflap.png', 'images/bluebird-midflap.png', 'images/bluebird-upflap.png'],
+        elif level < 6:
+            bird_level_dictionary[level] = ['images/redbird-downflap.png', 'images/redbird-midflap.png', 'images/redbird-upflap.png'],
+        else:
+            bird_level_dictionary[level] = ['images/yellowbird-downflap.png', 'images/yellowbird-midflap.png', 'images/yellowbird-upflap.png'],
+
+    flippy.create_bird(level)
     flippy.make_pipes(
         {
             1:'images/pipe-green.png'
         }
     )
-    # flippy.make_score()
-    # flippy.make_intro('images/message.png')
-    # flippy.show_gameover('images/gameover.png')
+    flippy.make_score()
+    flippy.make_intro('images/message.png')
+    flippy.show_gameover('images/gameover.png')
     flippy.run_game()

@@ -20,7 +20,6 @@ MIN_PIPE_GAP = 150
 MAX_GRAVITY = 9.8
 ALL_BIRD_COLORS = ['red', 'yellow', 'blue']
 ALL_FLAP_VARIANTS = ['down', 'mid', 'up']
-ALL_PIPE_VARIANTS = ['green', 'red']
 MAX_LEVEL = 7
 SCORE_PER_LEVEL = 5
 
@@ -109,7 +108,7 @@ class Pipe(pygame.sprite.Sprite):
         self.current_speed = current_speed
         self.orientation = orientation # 1 if pipe is upside-down, 0 if it is not
 
-        self.image = pygame.image.load(f'images/pipe-{'green' if self.level < int(MAX_LEVEL / 2) else 'red'}.png')
+        self.image = pygame.image.load(f'images/pipe-{"green" if self.level < int(MAX_LEVEL / 2) else "red"}.png')
         self.rect = self.image.get_rect()
         if orientation == 1:
             self.image = pygame.transform.flip(self.image, False, True)
@@ -209,7 +208,9 @@ class FlappyBird:
                 self.update_score(bird=bird, pipe=pipe_group.sprites()[0])
      
             # Get and draw score and high score
-            self.get_and_draw_scores()
+            self.draw_text(f'Level: {str(self.current_user_level)}', self.font_info, self.text_color_white, 120, 20)
+            self.draw_text(f'Score: {str(self.current_user_score)}', self.font_info, self.text_color_white, 10, 20)
+            self.get_and_draw_high_scores()
        
             # collision logics
             self.update_game_over_status(bird_group=bird_group, 
@@ -246,6 +247,8 @@ class FlappyBird:
 
         Hard
         """
+        pass
+        # ---- To be removed when handover to students --------
         rand_int = random.randint(-90, 90)
         ground_pipe = Pipe(x=SCREEN_WIDTH, y=SCREEN_HEIGHT / 2 + rand_int, 
                             level=self.current_user_level, 
@@ -257,13 +260,21 @@ class FlappyBird:
                             orientation=1)
         pipe_group.add(ground_pipe)
         pipe_group.add(sky_pipe)
+        # ---- To be removed when handover to students --------
             
 
     def update_score(self, bird, pipe):
         """ 
+        Hint: If the left most side of bird is
+        more than a pipe's right side, we count
+        it as an encounter and we increment the 
+        score by 1
+
         Hard
 
         """
+        pass
+        # ---- To be removed when handover to students --------
         bird_left = bird.rect.left
         bird_right = bird.rect.right
         pipe_left = pipe.rect.left
@@ -277,6 +288,7 @@ class FlappyBird:
             and self.is_pipe_encountered == True:
             self.current_user_score += 1 
             self.is_pipe_encountered = False
+        # ---- To be removed when handover to students --------
 
     def update_game_over_status(self, bird_group, pipe_group):
         """
@@ -285,23 +297,25 @@ class FlappyBird:
 
         Hard
         """
+        pass
         # ---- To be removed when handover to students --------
         isPipeCollided = pygame.sprite.groupcollide(bird_group, pipe_group, False, False)
         isBirdHitGround = bird_group.sprites()[0].rect.bottom >= GROUND_Y
         # ---- To be removed when handover to students --------
         
-        # the Falses are for killing collisions (deleting either or both 
-        # objects upon collision)
-        # isPipeCollided = False # Student can edit this line
-        # isBirdHitGround = False # Student can edit this line
+        isPipeCollided = False # Student can edit this line
+        isBirdHitGround = False # Student can edit this line
+
         if isPipeCollided or isBirdHitGround:
             self.is_game_over = True
 
     def handle_add_bonus_score_when_bird_touched_ceiling(self, bird):
         """
         Bonus
+        Hint: when the bird touches the ceiling, we increment the 
+        score by 2
 
-        Easy
+        Medium
         """
         pass
         # ---- To be removed when handover to students --------
@@ -325,32 +339,39 @@ class FlappyBird:
 
     def handle_start_game(self, event):
         """
-        Demo
+        Set some boolean(s) to start the game
+
+        Easy
         """
         if (event.type == pygame.MOUSEBUTTONDOWN 
             or (event.type == pygame.KEYDOWN and (event.key == pygame.K_SPACE or event.key == pygame.K_UP))) \
                 and self.is_game_started == False:
+            # ---- To be removed when handover to students --------
             self.is_game_started = True
+            # ---- To be removed when handover to students --------
 
     def handle_reset_game(self, event, bird, pipe_group):
         """
         Reset game when it is game over and the user right clicked or 
-        pressed the Spacebar/Up-arrow key
+        pressed the Spacebar/Up-arrow key.
 
-        The score must be reset, as well as 
-        the game_over and game_started statuses
+        Hint: The score must be reset, as well as 
+        the game_over and game_started statuses. 
 
-        Flappy's position must also be reset,
-        and pipe_group must be cleared
-
+        Flappy's position will also be reset,
+        and pipe_group will be cleared
+        
         Medium
         """
+        pass
         if (event.type == pygame.MOUSEBUTTONDOWN 
                 or (event.type == pygame.KEYDOWN and (event.key == pygame.K_SPACE or event.key == pygame.K_UP))) \
                 and self.is_game_over == True:
+            # ---- To be removed when handover to students --------
             self.current_user_score = 0
             self.is_game_over = False
             self.is_game_started = True
+            # ---- To be removed when handover to students --------
 
             # ---------------- Don't edit these lines
             bird.reset()
@@ -362,22 +383,18 @@ class FlappyBird:
         """
         N/A
         """
-        # ---------------- Don't edit these lines
         img = font.render(text, True, color)
         self.screen.blit(img, (x, y))
-        # ---------------- Don't edit these lines
 
-    def get_and_draw_scores(self):
+    def get_and_draw_high_scores(self):
         """
         Medium
+        Hint: Compare high score with max score for every game render
         """
-        # ---------------- Don't edit these lines
-        self.draw_text(f'Score: {str(self.current_user_score)}', self.font_info, self.text_color_white, 10, 20)
-        # ---------------- Don't edit these lines
-
-        # Compare high score with max score for every game render
+        # ---- To be removed when handover to students --------
         self.high_score = max(self.current_user_score, self.high_score)
         self.draw_text(f'High score: {str(self.high_score)}', self.font_info, self.text_color_white, 10, 50)
+        # ---- To be removed when handover to students --------
 
 
 if __name__ == '__main__':    

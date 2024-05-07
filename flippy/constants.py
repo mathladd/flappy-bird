@@ -1,14 +1,16 @@
 
 import pygame
 
+# -------- DO NOT EDIT THESE ---------------
 FPS = 60
 SCREEN_WIDTH = 280
 SCREEN_HEIGHT = 610
 GROUND_Y = 500
 PIPE_HEIGHT = 320
+# -------- DO NOT EDIT THESE ---------------
+
 MIN_PIPE_GAP = 150
 MAX_GRAVITY = 9.8
-ALL_PIPE_VARIANTS = ['green', 'red']
 MAX_LEVEL = 7
-SCORE_PER_LEVEL = 1
+SCORE_PER_LEVEL = 5
 ALLOWED_KEYS = [pygame.K_SPACE, pygame.K_UP]

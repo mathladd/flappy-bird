@@ -186,7 +186,9 @@ class FlappyBird:
      
             # Get and draw score and high score
             if self.display_score:
-                self.get_and_draw_scores()
+                self.draw_text(f'Level: {str(self.current_user_level)}', self.font_info, self.text_color_white, 120, 20)
+                self.draw_text(f'Score: {str(self.current_user_score)}', self.font_info, self.text_color_white, 10, 20)
+                self.get_and_draw_high_scores()
        
             # collision logics
             if self.pipe_src:
@@ -374,19 +376,13 @@ class FlappyBird:
         """
         N/A
         """
-        # ---------------- Don't edit these lines
         img = font.render(text, True, color)
         self.screen.blit(img, (x, y))
-        # ---------------- Don't edit these lines
 
-    def get_and_draw_scores(self):
+    def get_and_draw_high_scores(self):
         """
         Medium
         """
-        # ---------------- Don't edit these lines
-        self.draw_text(f'Score: {str(self.current_user_score)}', self.font_info, self.text_color_white, 10, 20)
-        # ---------------- Don't edit these lines
-
         # Compare high score with max score for every game render
         self.high_score = max(self.current_user_score, self.high_score)
         self.draw_text(f'High score: {str(self.high_score)}', self.font_info, self.text_color_white, 10, 50)
