@@ -1,5 +1,5 @@
 """
-Class: ETEST programming class
+Class: ETEST advanced programming class
 Flappy Bird
 Author: 
 Date: 
@@ -10,7 +10,6 @@ import pygame
 from pygame.locals import *
 import random
 
-import pygame
 
 FPS = 60
 SCREEN_WIDTH = 280
@@ -49,7 +48,7 @@ class Bird(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.center = [x, y]
     
-    def update(self, is_game_started: bool, is_game_over: bool, level: int, score: int):
+    def update(self, is_game_started: bool, is_game_over: bool, level: int):
         if is_game_over:
             self.image = pygame.transform.rotate(self.all_flap_variants[self.flap_variant_index], -90)    # add rotation
         else:
@@ -200,8 +199,7 @@ class FlappyBird:
             # Update bird per clock tick 
             bird_group.update(is_game_started=self.is_game_started, 
                               is_game_over=self.is_game_over, 
-                              level=self.current_user_level,
-                              score=self.current_user_score)
+                              level=self.current_user_level)
             
             # Bonus score if hit top of screen
             self.handle_add_bonus_score_when_bird_touched_ceiling(bird)
