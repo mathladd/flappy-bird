@@ -32,11 +32,11 @@ if __name__ == '__main__':
             3: ['images/yellowbird-downflap.png', 'images/yellowbird-midflap.png', 'images/yellowbird-upflap.png'],
         }
     )
-    flippy.make_pipes(
-        {
-            1:'images/pipe-green.png'
-        }
-    )
+    # flippy.make_pipes(
+    #     {
+    #         1:'images/pipe-green.png'
+    #     }
+    # )
     # flippy.make_score()
     # flippy.make_intro('images/message.png')
     # flippy.show_gameover('images/gameover.png')
