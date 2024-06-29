@@ -6,7 +6,6 @@ import random
 from flippy.constants import *
 
 
-
 class Bird(pygame.sprite.Sprite):
     """
     This class implements the Bird from FlappyBird
@@ -195,7 +194,7 @@ class FlappyBird:
                 self.update_game_over_status(bird_group=self.bird_group, 
                                             pipe_group=pipe_group)
 
-            # When game starts, render pipes + scroll both pipes and ground
+            # When game starts, render & scroll pipes
             if self.pipe_src and not self.is_game_over and self.is_game_started:
                 time_now = pygame.time.get_ticks()
                 if time_now - self.last_piped_time > 2000 + (2000 if self.current_user_score == SCORE_PER_LEVEL else 0) + random.randint(0, 1000):
@@ -203,7 +202,8 @@ class FlappyBird:
                     self.last_piped_time = time_now
                 pipe_group.update(is_game_over=self.is_game_over)
                 
-                # Scroll ground
+            # When game starts, scroll ground
+            if not self.is_game_over and self.is_game_started:
                 self.ground_scroll -= (self.current_user_scroll_speed - 1 if self.current_user_score == SCORE_PER_LEVEL else self.current_user_scroll_speed)
                 if abs(self.ground_scroll) > 46:
                     self.ground_scroll = 0
